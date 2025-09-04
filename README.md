@@ -55,7 +55,7 @@ Make sure you have the following installed on your system:
 
 1.  **Clone the repository**
     ```bash
-    git clone https://github.com/sharmaronit/civic_issues.git
+    git clone https://github.com/Abhisheksharma654/civic.git
     ```
 2.  **Navigate to the project directory**
     ```bash
@@ -83,7 +83,7 @@ Make sure you have the following installed on your system:
 
 This project is optimized for deployment on [Vercel](https://vercel.com/).
 
-1.  Push your code to your GitHub repository (e.g., `https://github.com/sharmaronit/civic_issues`).
+1.  Push your code to your GitHub repository (e.g., `https://github.com/Abhisheksharma654/civic`).
 2.  Connect your GitHub repository to your Vercel account.
 3.  Follow the on-screen instructions to deploy.
 4.  The application will be deployed automatically on every push to the `main` branch.
@@ -112,14 +112,9 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 ## 📧 Contact
 
-Ronit Sharma - [@sharmaronit](https://github.com/sharmaronit)
+Ronit Sharma - [@Abhisheksharma654](https://github.com/Abhisheksharma654)
 
-Project Link: [https://github.com/sharmaronit/civic_issues](https://github.com/sharmaronit/civic_issues)
+Project Link: [https://github.com/Abhisheksharma654/civic](https://github.com/Abhisheksharma654/civic)
 
----
-
-**Made with ❤️ by [@geminiproronit](https://twitter.com/geminiproronit)**
-
----
 
 
