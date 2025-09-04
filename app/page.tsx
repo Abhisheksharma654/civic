@@ -553,8 +553,6 @@ export default function HomePage() {
         )}
       </div>
 
-
-
       {/* GitHub Contribution Section */}
       <div className="mx-auto max-w-xl px-4 py-4 text-center">
         <div className="bg-black-50 rounded-lg p-4 border border-red-500">
@@ -598,7 +596,7 @@ export default function HomePage() {
               rel="noopener noreferrer"
               className="text-blue-500 hover:text-blue-700 hover:underline font-medium"
             >
-              @geminiproronit
+
             </a>
             <span className="mx-2">|</span> {/* This is a separator */}
             <a
