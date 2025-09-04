@@ -26,7 +26,7 @@ function generateUUID(): string {
     return crypto.randomUUID();
   }
   // Fallback for older browsers
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     const r = Math.random() * 16 | 0;
     const v = c === 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
@@ -88,15 +88,15 @@ export default function HomePage() {
 
   useEffect(() => {
     if (!issueImage) return
-    ;(async () => {
-      setIsLocLoading(true)
-      const meta = await getLocationFromImageOrDevice(issueImage)
-      if (meta?.coords) setCoords(meta.coords)
-      // Only set date from image if user hasn't manually set one
-      if (meta?.date && !userSetTime) setDateTime(meta.date)
-      if (meta?.pretty) setLocText(meta.pretty)
-      setIsLocLoading(false)
-    })()
+      ; (async () => {
+        setIsLocLoading(true)
+        const meta = await getLocationFromImageOrDevice(issueImage)
+        if (meta?.coords) setCoords(meta.coords)
+        // Only set date from image if user hasn't manually set one
+        if (meta?.date && !userSetTime) setDateTime(meta.date)
+        if (meta?.pretty) setLocText(meta.pretty)
+        setIsLocLoading(false)
+      })()
   }, [issueImage, userSetTime])
 
   // Fix hydration error: set local date/time only on client
@@ -122,7 +122,7 @@ export default function HomePage() {
 
   const handleGenerate = async () => {
     if (!issueImage) return;
-    
+
     // Debug logging for issue image
     console.log('Generating certificate with issue image:', {
       name: issueImage.name,
@@ -131,7 +131,7 @@ export default function HomePage() {
       lastModified: issueImage.lastModified,
       exists: !!issueImage
     });
-    
+
     const id = generateUUID();
     const url = `/report/${id}` // Just the path, domain handled in SocialShare;
 
@@ -139,15 +139,15 @@ export default function HomePage() {
     const topLeaders = selectedLeaders
       .filter((key) => key !== "modi") // exclude Modi from top, always at bottom
       .map((key) => {
-  if (key === "cm") return { url: cmImage, name: selectedCMName || "Hon' Selected State/UT CM" };
-  if (key === "custom") return { url: customImage, name: customName || "Hon' Selected Leader" };
+        if (key === "cm") return { url: cmImage, name: selectedCMName || "Hon' Selected State/UT CM" };
+        if (key === "custom") return { url: customImage, name: customName || "Hon' Selected Leader" };
         const found = LEADER_OPTIONS.find((opt) => opt.key === key);
         return found ? { url: found.imageUrl, name: found.label } : null;
       })
       .filter((leader): leader is { url: string; name: string } => Boolean(leader));
 
     // Conditionally include Modi at bottom left
-    const modiImage = includeModiPhoto 
+    const modiImage = includeModiPhoto
       ? (LEADER_OPTIONS.find((opt) => opt.key === "modi")?.imageUrl || "/images/pm-modi.png")
       : "/images/leader-default.png"; // Use placeholder if Modi photo is disabled
 
@@ -198,7 +198,7 @@ export default function HomePage() {
       </header>
 
       <div className="mx-auto max-w-xl px-4 py-4 space-y-6">
-        <Card> 
+        <Card>
           <CardHeader>
             <CardTitle className="text-base">1) {t.translations.uploadPhoto}</CardTitle>
           </CardHeader>
@@ -233,36 +233,36 @@ export default function HomePage() {
           </CardHeader>
           <CardContent className="grid gap-4">
             <div className="grid gap-2">
-            <Label htmlFor="issue-type">{t.translations.issueLabel}</Label>
-  
-            {/* Wrapper for custom arrow */}
-            <div className="relative">
-              <select
-                id="issue-type"
-                className="appearance-none w-full bg-black border border-black rounded-md px-3 py-2 pr-8 text-white focus:outline-none focus:ring-2 focus:ring-grey-90"
-                value={issueType}
-                onChange={(e) => setIssueType(e.target.value as IssueType)}
-              >
-                {/* These options will have a black background */}
-                <option className="bg-gray-90 text-white">Pothole</option>
-                <option className="bg-gray-90 text-white">Garbage</option>
-                <option className="bg-gray-90 text-white">Broken Streetlight</option>
-                <option className="bg-gray-90 text-white">Illegal Dumping</option>
-                <option className="bg-gray-90 text-white">Waterlogging</option>
-                <option className="bg-gray-90 text-white">Other</option>
-              </select>
-                
+              <Label htmlFor="issue-type">{t.translations.issueLabel}</Label>
+
+              {/* Wrapper for custom arrow */}
+              <div className="relative">
+                <select
+                  id="issue-type"
+                  className="appearance-none w-full bg-black border border-black rounded-md px-3 py-2 pr-8 text-white focus:outline-none focus:ring-2 focus:ring-grey-90"
+                  value={issueType}
+                  onChange={(e) => setIssueType(e.target.value as IssueType)}
+                >
+                  {/* These options will have a black background */}
+                  <option className="bg-gray-90 text-white">Pothole</option>
+                  <option className="bg-gray-90 text-white">Garbage</option>
+                  <option className="bg-gray-90 text-white">Broken Streetlight</option>
+                  <option className="bg-gray-90 text-white">Illegal Dumping</option>
+                  <option className="bg-gray-90 text-white">Waterlogging</option>
+                  <option className="bg-gray-90 text-white">Other</option>
+                </select>
+
                 {/* Custom Arrow */}
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-90">
-                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-              </svg>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-90">
+                  <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                  </svg>
+                </div>
+              </div>
+
+              <p className="text-xs text-gray-00">Auto-tagging coming soon; choose a type for now.</p>
             </div>
-            </div>
-  
-            <p className="text-xs text-gray-00">Auto-tagging coming soon; choose a type for now.</p>
-            </div>
-              
+
 
             <div className="grid gap-2">
               <Label htmlFor="note">{t.translations.noteLabel}</Label>
@@ -370,8 +370,8 @@ export default function HomePage() {
                     />
                     <span className="text-sm">{opt.label}</span>
                     <div className="flex flex-col items-center ml-2">
-                      <img 
-                        src={opt.imageUrl} 
+                      <img
+                        src={opt.imageUrl}
                         alt={opt.label}
                         className="h-8 w-8 rounded-full object-cover border"
                       />
@@ -384,7 +384,7 @@ export default function HomePage() {
               </div>
             </div>
 
-              {selectedLeaders.includes("cm") && (
+            {selectedLeaders.includes("cm") && (
               <div className="space-y-2">
                 <Label className="text-sm">Select State/UT CM Photo</Label>
                 <LeaderPhotoInput
@@ -406,7 +406,7 @@ export default function HomePage() {
                 )}
               </div>
             )}
-            
+
             {/* Modi Photo Control */}
             <div className="space-y-2">
               <Label className="flex items-center gap-2">
@@ -428,8 +428,8 @@ export default function HomePage() {
             <div className="mt-4 p-3 bg-grey-500/10 border border-grey-500/20 rounded-lg">
               <p className="text-xs text-red-800 font-medium mb-2">⚠️ IMPORTANT DISCLAIMER ⚠️</p>
               <p className="text-xs text-red-700">
-                This is <strong>NOT an official government document</strong>. This is a citizen-generated report for civic awareness purposes only. 
-                The use of leader photos does not imply official endorsement or government affiliation. 
+                This is <strong>NOT an official government document</strong>. This is a citizen-generated report for civic awareness purposes only.
+                The use of leader photos does not imply official endorsement or government affiliation.
                 No official action is guaranteed from this report.
               </p>
             </div>
@@ -460,7 +460,7 @@ export default function HomePage() {
         </Card>
 
         <div className="flex gap-3">
-          <Button className="bg-gradient-to-r from-black-800 to-black-60 hover:opacity-90 text-black"  onClick={handleGenerate}>
+          <Button className="bg-gradient-to-r from-black-800 to-black-60 hover:opacity-90 text-black" onClick={handleGenerate}>
             {t.translations.generateCertificate}
           </Button>
           <Button
@@ -540,10 +540,10 @@ export default function HomePage() {
                   — demo only, no backend yet.
                 </p>
               )}
-              
+
               {/* Email and RTI Options */}
               {certData && (
-                <EmailRTIOptions 
+                <EmailRTIOptions
                   issueType={certData.issueType}
                   location={certData.locationText}
                 />
@@ -566,7 +566,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-2 justify-center">
             <a
-              href="https://github.com/sharmaronit"
+              href="https://github.com/Abhisheksharma654"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-gray-500 hover:bg-gray-800 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200 text-sm"
@@ -575,7 +575,7 @@ export default function HomePage() {
               <span>Report An Issue</span>
             </a>
             <a
-              href="https://github.com/sharmaronit"
+              href="https://github.com/Abhisheksharma654"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200 text-sm"
@@ -592,26 +592,26 @@ export default function HomePage() {
         <div className="mx-auto max-w-xl px-4 text-center">
           <p className="text-sm text-white/80 mb-600">
             Made with ❤️ by{" "}
-            <a 
-              href="https://twitter.com/geminiproronit" 
-              target="_blank" 
+            <a
+              href="https://twitter.com"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:text-blue-700 hover:underline font-medium"
             >
               @geminiproronit
             </a>
             <span className="mx-2">|</span> {/* This is a separator */}
-            <a 
-              href="https://www.linkedin.com/in/ronit-sharma-039884356"  // <-- IMPORTANT: REPLACE WITH YOUR LINKEDIN URL
-              target="_blank" 
+            <a
+              href="https://www.linkedin.com"  // <-- IMPORTANT: REPLACE WITH YOUR LINKEDIN URL
+              target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:text-blue-700 hover:underline font-large"
             >
               Connect on LinkedIn
-          </a>
-        </p>
-      </div>
-  </footer>
-  </main>
+            </a>
+          </p>
+        </div>
+      </footer>
+    </main>
   )
 }
